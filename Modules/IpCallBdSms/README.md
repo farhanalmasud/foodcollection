@@ -4,7 +4,7 @@ Adds **IP Call BD SMS** (`ipcallbd_sms`) to the 6amMart SMS gateway system.
 
 ## API
 
-- URL: `https://ipcall.bd/smsapi/send`
+- URL: `https://portal.ipcall.bd/smsapi/send`
 - Method: POST (JSON)
 - Fields: `api_key`, `mobiles` (array), `message`
 

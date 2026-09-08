@@ -36,7 +36,7 @@ class IpCallBdSmsSender
             $response = Http::timeout(30)
                 ->acceptJson()
                 ->asJson()
-                ->post('https://ipcall.bd/smsapi/send', [
+                ->post('https://portal.ipcall.bd/smsapi/send', [
                     'api_key' => $apiKey,
                     'mobiles' => [$mobile],
                     'message' => $message,
