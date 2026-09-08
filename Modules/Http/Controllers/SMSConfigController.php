@@ -11,6 +11,7 @@ use Illuminate\Routing\Controller;
 use Brian2694\Toastr\Facades\Toastr;
 use Modules\Gateways\Traits\Processor;
 use Modules\Gateways\Entities\Setting;
+use Modules\IpCallBdSms\Services\IpCallBdSmsRegistrar;
 
 class SMSConfigController extends Controller
 {
@@ -29,6 +30,11 @@ class SMSConfigController extends Controller
 
     public function sms_config_get(): Application|Factory|View|\Illuminate\Foundation\Application
     {
+        try {
+            IpCallBdSmsRegistrar::ensureRegistered();
+        } catch (\Throwable) {
+        }
+
         $data_values = $this->setting->whereIn('settings_type', ['sms_config'])->get();
         if (base64_decode(env('SOFTWARE_ID')) == '40224772') {
             return view('Gateways::sms-config.demandium-sms-config', compact('data_values'));

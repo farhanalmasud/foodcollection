@@ -8,12 +8,18 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
+use Modules\IpCallBdSms\Services\IpCallBdSmsRegistrar;
 
 class SMSModuleController extends Controller
 {
     public function sms_index()
     {
         $published_status = addon_published_status('Gateways');
+
+        try {
+            IpCallBdSmsRegistrar::ensureRegistered();
+        } catch (\Throwable) {
+        }
 
         $routes = config('addon_admin_routes');
         $desiredName = 'sms_setup';

@@ -44,7 +44,13 @@
             <div class="col-12 digital_payment_methods  {{ $is_published }} mb-3" >
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="page-title">{{translate($gateway->key_name)}}</h4>
+                        <h4 class="page-title">
+                            @if($gateway->key_name === 'ipcallbd_sms')
+                                {{ translate('ipcallbd_sms') }}
+                            @else
+                                {{ translate($gateway->key_name) }}
+                            @endif
+                        </h4>
                     </div>
                     <div class="card-body p-30">
                         <form action="{{route('admin.business-settings.third-party.sms-module-update',[$gateway->key_name])}}" method="POST"
