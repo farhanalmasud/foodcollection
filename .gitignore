@@ -1,0 +1,82 @@
+/node_modules
+/public/hot
+/public/storage
+/public/build
+/storage/*.key
+/vendor
+
+# Builder addon release zips produced by `npm run package:addon`
+/releases
+
+# Environment
+.env
+.env.backup
+
+# Laravel / PHPUnit
+.phpunit.result.cache
+
+# Docker / Homestead
+docker-compose.override.yml
+Homestead.json
+Homestead.yaml
+docker-local/
+
+# Logs
+npm-debug.log
+yarn-error.log
+error_log
+/storage/logs/*
+!/storage/logs/.gitignore
+
+# Laravel generated files
+/storage/tmp
+/storage/framework/cache/*
+!/storage/framework/cache/.gitignore
+/storage/framework/sessions/*
+!/storage/framework/sessions/.gitignore
+/storage/framework/views/*
+!/storage/framework/views/.gitignore
+
+# User uploaded files
+/storage/app/public/*
+
+# Debug files
+/storage/debugbar/*
+
+# Next.js generated files
+/resources/reactapp/.next/
+/resources/reactapp/node_modules/
+
+# Backup files
+/backuptemp/
+
+# Database dumps
+*.sql
+
+# Archives
+*.zip
+*.tar
+*.gz
+
+# System / IDE files
+.DS_Store
+/public/.well-known
+.idea/
+.vscode/
+.ddev/
+
+# Claude Code
+CLAUDE.md
+.claude/
+PROJECT_CONTEXT.md
+
+# Local IDE agent instructions
+AGENTS.md
+Modules/Builder/AGENTS.md
+Modules/Builder/resources/dist/build.zip
+
+# Feature documentation (local)
+/Documentation/
+
+# Builder generated files
+Modules/Builder/resources/dist/build.zip
