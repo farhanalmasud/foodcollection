@@ -1,0 +1,11 @@
+{
+    "name": "IpCallBdSms",
+    "alias": "ipcallbdsms",
+    "description": "IP Call BD SMS gateway for FoodCollection",
+    "keywords": [],
+    "priority": 0,
+    "providers": [
+        "Modules\\IpCallBdSms\\Providers\\IpCallBdSmsServiceProvider"
+    ],
+    "files": []
+}
