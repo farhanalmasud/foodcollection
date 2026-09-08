@@ -4572,6 +4572,7 @@
   'bucket' => 'Bucket',
   'end_point' => 'End point',
   'alphanet_sms' => 'Alphanet sms',
+  'ipcallbd_sms' => 'IP Call BD SMS',
   'Storage_Connection' => 'Storage Connection',
   'storage_connection_credentials_setup' => 'Storage connection credentials setup',
   'Storage_Connection_Settings' => 'Storage Connection Settings',
