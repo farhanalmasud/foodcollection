@@ -75,8 +75,11 @@ AGENTS.md
 Modules/Builder/AGENTS.md
 Modules/Builder/resources/dist/build.zip
 
-# Feature documentation (local)
+# Feature documentation (local — never push to server)
 /Documentation/
+
+# Cursor project skills & local agent knowledge (never push to server)
+.cursor/skills/
 
 # Builder generated files
 Modules/Builder/resources/dist/build.zip
