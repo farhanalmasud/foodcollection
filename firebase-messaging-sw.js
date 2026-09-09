@@ -2,13 +2,13 @@ importScripts("https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js
 importScripts("https://www.gstatic.com/firebasejs/10.12.0/firebase-messaging-compat.js");
 
 firebase.initializeApp({
-    apiKey: "AIzaSyD0Z911mOoWCVkeGdjhIKwWFPRgvd6ZyAw",
-    authDomain: "stackmart-500c7.firebaseapp.com",
-    projectId: "stackmart-500c7",
-    storageBucket: "stackmart-500c7.appspot.com",
-    messagingSenderId: "491987943015",
-    appId: "1:491987943015:web:d8bc7ab8dbc9991c8f1ec2",
-    measurementId: ""
+    apiKey: "AIzaSyBiw5ieTdsrQOMfkZa75MSFEtV0GubGFlk",
+    authDomain: "food-collections-6c68b.firebaseapp.com",
+    projectId: "food-collections-6c68b",
+    storageBucket: "food-collections-6c68b.appspot.com",
+    messagingSenderId: "651450827473",
+    appId: "1:651450827473:web:4e4abb60d30611f8343bf0",
+    measurementId: "G-BJNZR104CZ"
 });
 
 const messaging = firebase.messaging();
