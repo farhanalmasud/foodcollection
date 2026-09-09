@@ -33,6 +33,13 @@ class SMS_module
             return self::alphanet_sms($receiver, $otp);
         }
 
+        // FC-CUSTOM-START [FN-002: ipcallbd-sms]
+        $config = self::get_settings('ipcallbd_sms');
+        if (isset($config) && $config['status'] == 1) {
+            return self::ipcallbd_sms($receiver, $otp);
+        }
+        // FC-CUSTOM-END [FN-002]
+
         return 'not_found';
     }
 
@@ -242,8 +249,20 @@ class SMS_module
         return $response;
     }
 
+    // FC-CUSTOM-START [FN-002: ipcallbd-sms]
+    public static function ipcallbd_sms($receiver, $otp, $message = null): string
+    {
+        if (class_exists(\Modules\IpCallBdSms\Services\IpCallBdSmsSender::class)) {
+            return \Modules\IpCallBdSms\Services\IpCallBdSmsSender::send(
+                $receiver,
+                $otp,
+                self::get_settings('ipcallbd_sms')
+            );
+        }
 
-
+        return 'error';
+    }
+    // FC-CUSTOM-END [FN-002]
 
     public static function get_settings($name)
     {
