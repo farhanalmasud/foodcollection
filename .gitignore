@@ -38,3 +38,7 @@ info.php
 testflem.php
 aaa.php
 /composer.phar
+
+# Database backups
+/installation/backup/
+/installation/*.sql
