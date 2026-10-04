@@ -2,7 +2,7 @@
 
 namespace App\Http\Middleware;
 
-use App\Traits\ActivationClass;
+use App\Traits\System\ActivationTrait;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 
 class ActivationCheckMiddleware
 {
-    use ActivationClass;
+    use ActivationTrait;
 
     /**
      * Handle an incoming request.

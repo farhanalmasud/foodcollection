@@ -8,17 +8,11 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use App\Models\Setting;
-use Modules\IpCallBdSms\Services\IpCallBdSmsRegistrar;
 
 class SMSModuleController extends Controller
 {
     public function sms_index()
     {
-        try {
-            IpCallBdSmsRegistrar::ensureRegistered();
-        } catch (\Throwable) {
-        }
-
         $published_status = addon_published_status('Gateways');
 
         $routes = config('addon_admin_routes');
@@ -32,7 +26,7 @@ class SMSModuleController extends Controller
                 }
             }
         }
-        $data_values=  Setting::where('settings_type','sms_config')->whereIn('key_name', ['twilio','nexmo','2factor','msg91','alphanet_sms','ipcallbd_sms'])->orderByDesc('is_active')->get() ?? [];
+        $data_values=  Setting::where('settings_type','sms_config')->whereIn('key_name', ['twilio','nexmo','2factor','msg91','alphanet_sms'])->orderByDesc('is_active')->get() ?? [];
         return view('admin-views.business-settings.sms-index',compact('data_values','published_status','payment_url'));
     }
 
@@ -42,11 +36,11 @@ class SMSModuleController extends Controller
         $is_firebase_active=Helpers::get_business_settings('firebase_otp_verification') ?? 0;
         $phone_verification_status = Helpers::get_business_settings('phone_verification_status')??0;
         if(!$is_firebase_active && $login_setup_status && ($request['status']==0)){
-            Toastr::warning(translate('otp_login_status_is_enabled_in_login_setup._First_disable_from_login_setup.'));
+            Toastr::warning(translate('Otp login status is enabled in login setup. First disable from login setup.'));
             return redirect()->back();
         }
         if(!$is_firebase_active && $phone_verification_status && ($request['status']==0)){
-            Toastr::warning(translate('phone_verification_status_is_enabled_in_login_setup._First_disable_from_login_setup.'));
+            Toastr::warning(translate('Phone verification status is enabled in login setup. First disable from login setup.'));
             return redirect()->back();
         }
         if ($module == 'twilio') {
@@ -88,15 +82,7 @@ class SMSModuleController extends Controller
                 'sender_id' =>$request['sender_id'] ?? null,
                 'otp_template' =>$request['otp_template'],
             ];
-        // FC-CUSTOM-START [FN-002: ipcallbd-sms]
-        } elseif ($module == 'ipcallbd_sms' || $request['gateway'] == 'ipcallbd_sms') {
-            $additional_data = [
-                'status' => $request['status'],
-                'api_key' => $request['api_key'],
-                'otp_template' => $request['otp_template'],
-            ];
         }
-        // FC-CUSTOM-END [FN-002]
 
         $data= ['gateway' => $module ,
         'mode' =>  isset($request['status']) == 1  ?  'live': 'test'
@@ -113,7 +99,7 @@ class SMSModuleController extends Controller
     ]);
 
     if ($request['status'] == 1) {
-        foreach (['twilio','nexmo','2factor','msg91','alphanet_sms','ipcallbd_sms'] as $gateway) {
+        foreach (['twilio','nexmo','2factor','msg91','alphanet_sms'] as $gateway) {
             if ($module != $gateway) {
                 $keep = Setting::where(['key_name' => $gateway, 'settings_type' => 'sms_config'])->first();
                 if (isset($keep)) {

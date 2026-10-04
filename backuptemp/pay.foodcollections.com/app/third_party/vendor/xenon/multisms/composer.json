@@ -1,0 +1,30 @@
+{
+    "name": "xenon/multisms",
+    "description": "This is universal sms gateway service provider for Bangladesh. You can easily use this library for sending message using Bangladeshi sms gateway providers",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ariful",
+            "email": "arifsofg@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "guzzlehttp/guzzle": "^6.3|^7.2",
+        "ext-curl": "*",
+        "ext-mbstring": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Xenon\\Multisms\\": "src/"
+        }
+    },
+    "autoload-dev": {
+
+    },
+    "require-dev": {
+        "filp/whoops": "^2.7@dev",
+        "league/booboo": "dev-master"
+    }
+}

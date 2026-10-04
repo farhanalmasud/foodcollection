@@ -1,0 +1,19 @@
+{
+    "require": {
+        "php": "^7.4|^8.1",
+        "guzzlehttp/guzzle": "^7.4",
+        "phpmailer/phpmailer": "^6.6",
+        "paypal/paypal-checkout-sdk": "^1.0",
+        "stripe/stripe-php": "^10.5",
+        "mailgun/mailgun-php": "^3.5",
+        "symfony/http-client": "^6.2",
+        "nyholm/psr7": "^1.8",
+        "sendgrid/sendgrid": "^8.0",
+        "xenon/multisms": "v1.0.2.1"
+    },
+    "config": {
+        "allow-plugins": {
+            "php-http/discovery": true
+        }
+    }
+}
