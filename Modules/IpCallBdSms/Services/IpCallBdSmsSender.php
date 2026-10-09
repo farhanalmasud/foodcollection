@@ -11,9 +11,12 @@ class IpCallBdSmsSender
     {
         if (!$config) {
             $data = config_settings('ipcallbd_sms', 'sms_config');
-            $config = $data && $data->live_values
-                ? (is_array($data->live_values) ? $data->live_values : json_decode($data->live_values, true))
-                : null;
+            $config = null;
+            if ($data && !is_null($data->live_values ?? null)) {
+                $config = is_array($data->live_values)
+                    ? $data->live_values
+                    : json_decode($data->live_values, true);
+            }
         }
 
         if (!$config || (int) ($config['status'] ?? 0) !== 1) {
@@ -22,6 +25,7 @@ class IpCallBdSmsSender
 
         $apiKey = trim((string) ($config['api_key'] ?? ''));
         if ($apiKey === '') {
+            Log::warning('IpCallBdSms: missing api_key');
             return 'error';
         }
 
@@ -29,6 +33,7 @@ class IpCallBdSmsSender
         $mobile = self::normalizeMobile($receiver);
 
         if ($mobile === '') {
+            Log::warning('IpCallBdSms: invalid mobile', ['receiver' => $receiver]);
             return 'error';
         }
 
@@ -42,16 +47,20 @@ class IpCallBdSmsSender
                     'message' => $message,
                 ]);
 
-            if ($response->successful() && $response->json('success') === true) {
+            $body = $response->json();
+            if ($response->successful() && self::isSuccess($body)) {
                 return 'success';
             }
 
             Log::warning('IpCallBdSms: send failed', [
                 'mobile' => $mobile,
-                'body' => $response->json(),
+                'status' => $response->status(),
+                'body' => $body ?? $response->body(),
             ]);
         } catch (\Throwable $exception) {
-            Log::error('IpCallBdSms: ' . $exception->getMessage());
+            Log::error('IpCallBdSms: ' . $exception->getMessage(), [
+                'mobile' => $mobile,
+            ]);
         }
 
         return 'error';
@@ -70,5 +79,16 @@ class IpCallBdSmsSender
         }
 
         return $mobile;
+    }
+
+    private static function isSuccess(mixed $body): bool
+    {
+        if (!is_array($body)) {
+            return false;
+        }
+
+        $success = $body['success'] ?? null;
+
+        return $success === true || $success === 1 || $success === '1' || $success === 'true';
     }
 }

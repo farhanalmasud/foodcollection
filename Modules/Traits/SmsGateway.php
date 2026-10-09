@@ -631,6 +631,11 @@ trait  SmsGateway
     {
         $data = config_settings($name, 'sms_config');
         if (isset($data) && !is_null($data->live_values)) {
+            // FC-CUSTOM-START [FN-002: ipcallbd-sms]
+            if (is_array($data->live_values)) {
+                return $data->live_values;
+            }
+            // FC-CUSTOM-END [FN-002]
             return json_decode($data->live_values, true);
         }
         return null;
